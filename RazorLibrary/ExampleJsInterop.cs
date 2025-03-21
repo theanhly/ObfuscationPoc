@@ -14,10 +14,15 @@ namespace RazorLibrary
     {
         private readonly Lazy<Task<IJSObjectReference>> moduleTask;
 
+        private string test = "";
+
+        protected int test2 = 0;
         public ExampleJsInterop(IJSRuntime jsRuntime)
         {
             moduleTask = new(() => jsRuntime.InvokeAsync<IJSObjectReference>(
                 "import", "./_content/RazorLibrary/exampleJsInterop.js").AsTask());
+            var resourceTest = Resource.Label_Test;
+            Console.WriteLine(resourceTest);
         }
 
         public async ValueTask<string> Prompt(string message)
@@ -33,6 +38,11 @@ namespace RazorLibrary
                 var module = await moduleTask.Value;
                 await module.DisposeAsync();
             }
+        }
+
+        private void DoNothing()
+        {
+            Console.WriteLine("I am doing nothing");
         }
     }
 }

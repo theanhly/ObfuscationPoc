@@ -3,11 +3,15 @@ using System.Reflection;
 
 namespace BlazorServerApp
 {
-    [Obfuscation(Exclude = true)]
+    [Obfuscation(Feature = "renaming", Exclude = true)]
     public class Startup
     {
         private string defaultAnswer = "42";
         public IConfiguration Configuration { get; set; }
+
+        private string test = "";
+
+        protected int test2 = 0;
 
         public Startup(IConfiguration configuration)
         {
